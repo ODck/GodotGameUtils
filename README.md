@@ -2,9 +2,9 @@
 This repository contains tools that can be useful for Godot developers:
 You can add the classes manually to Autoload, or activating the plugin in the plugins tab
 
-**Logger**: a simple logger class that allows you to log messages from your game or application.
-**DiContainer**: a dependency injection container that makes it easy to manage dependencies between objects.
-**SignalBus*: a signal bus class that allows you to send signals between objects without having to manually wire them up.
+* **Logger**: a simple logger class that allows you to log messages from your game or application.  
+* **DiContainer**: a dependency injection container that makes it easy to manage dependencies between objects.  
+* **SignalBus**: a signal bus class that allows you to send signals between objects without having to manually wire them up.
 ## Using the Logger
 The Logger class is a simple way to log messages from your game or application. You can use it to debug issues, track events, or just provide information to the user. To use the logger,you need configure the logger to output logs to different places, such as the console, a file, or even a custom implementation. Extending BaseSink.
 
