@@ -13,6 +13,12 @@ var _singleton : Dictionary = {
 func register_singleton(name, object : Object) -> void:
 	_singleton[name] = object
 
+## Register a singleton object with the given name.
+func register_singleton_node(name, object : Object) -> void:
+	if(object.is_class("Node")):
+		add_child(object)
+	_singleton[name] = object
+
 ## Retrieve a singleton object by its name. If it doesn't exist, assert an error.
 func resolveSingleton(name) -> Object:
 	if _singleton.has(name):
