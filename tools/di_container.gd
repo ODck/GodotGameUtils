@@ -39,4 +39,4 @@ func initialize():
 func _process(delta):
 	for instance in _singleton.values():
 		if instance.has_method("_tick"):
-			instance.tick(delta)
+			instance._tick(delta)
