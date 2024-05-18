@@ -34,7 +34,7 @@ To use the DiContainer, register the dependencies that your objects need. For ex
 #### 1. Registering Singletons
 To register a singleton object, use the `register_singleton` or `register_singleton_node` method:
 
-```
+```gdscript
 # create a di_init.gd script
 
 # Register a singleton object
@@ -49,7 +49,7 @@ To retrieve a singleton object by its name, use the resolveSingleton method:
 
 When you want to create an object that needs a dependency, you can ask the container for an instance of the dependency instead of creating it yourself. For example:
 
-```
+```gdscript
 # if a registered dependency needs to inject another dependency, add a _inject func in the script and they will be injected as well
 
 func _inject():
@@ -63,7 +63,7 @@ If the dependency needs to call `_init`, and `_process` methods, just add `_init
 ### Example
 Here's a simple example demonstrating the usage of DiContainer:
 
-```
+```gdscript
 # di_init.gd
 
 func _ready():
@@ -77,7 +77,7 @@ func _ready():
     DiContainer.initialize()
 ```
 
-```
+```gdscript
 # test.gd
 
 func _inject():
@@ -91,7 +91,7 @@ func _tick(delta):
 ## Using the SignalBus
 The SignalBus class is a signal bus that allows you to send signals between objects without having to manually wire them up. It's a great way to decouple objects from each other and make your code more modular.
 
-```
+```gdscript
 SignalBus.subscribe("PLAYER", _do_something)
 SignalBus.subscribe("PLAYER", _do_something2)
 SignalBus.publish("PLAYER")
