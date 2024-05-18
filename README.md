@@ -21,33 +21,91 @@ Logger.info("Starting game");
 ## Using the DiContainer
 The DiContainer class is a dependency injection container that makes it easy to manage dependencies between objects. It allows you to decouple objects from their dependencies, making it easier to test and maintain your code.
 
+### Features
+
+- Register and retrieve singleton objects by name.
+- Automatically inject dependencies into objects that implement an `_inject` method.
+- Initialize registered singletons with an optional `_initialize` method.
+- Process registered singletons with an optional `_tick` method.
+
+### Usage
 To use the DiContainer, register the dependencies that your objects need. For example:
+
+#### 1. Registering Singletons
+To register a singleton object, use the `register_singleton` or `register_singleton_node` method:
 
 ```
 # create a di_init.gd script
 
-DiContainer.register_singleton("Player", Player.new())
+# Register a singleton object
+DiContainer.register_singleton("SomeClass", SomeClass.new())
+
+# Register a singleton Node
+DiContainer.register_singleton_node("SomeNode", SomeNode.new())
 ```
 
-Then, when you want to create an object that needs a dependency, you can ask the container for an instance of the dependency instead of creating it yourself. For example:
+#### 2. Retrieving Singletons
+To retrieve a singleton object by its name, use the resolveSingleton method:
+
+When you want to create an object that needs a dependency, you can ask the container for an instance of the dependency instead of creating it yourself. For example:
 
 ```
-# if a registered dependency needs to inject another dependecies, add a _inject func in the script and they will be injected as well
+# if a registered dependency needs to inject another dependency, add a _inject func in the script and they will be injected as well
 
 func _inject():
-	player = DiContainer.resolveSingleton("PLAYER")
+	someObject = DiContainer.resolveSingleton("SomeClass")
 ```
 The get method will return an instance of MyObject with a reference to the 
 
-If the dependency needs to call `_init`, and `_process methods`, just add `_initialize` and `tick` methods, and the DiContainer will handle
+#### 3. Init and Process
+If the dependency needs to call `_init`, and `_process` methods, just add `_initialize` and `tick` methods, and the DiContainer will handle
+
+### Example
+Here's a simple example demonstrating the usage of DiContainer:
+
+```
+# di_init.gd
+
+func _ready():
+    # Add console sink for logging
+    Logger.add_sink(Logger.Console.new())
+    
+    # Register a singleton class
+    DiContainer.register_singleton("SomeClass", SomeClass.new())
+    
+    # Initialize registered singletons
+    DiContainer.initialize()
+```
+
+```
+# test.gd
+
+func _inject():
+    # Inject dependencies
+    _some_class = DiContainer.resolveSingleton("SomeClass")
+
+func _tick(delta):
+    # Process singleton objects
+```
 
 ## Using the SignalBus
 The SignalBus class is a signal bus that allows you to send signals between objects without having to manually wire them up. It's a great way to decouple objects from each other and make your code more modular.
 
 ```
 SignalBus.subscribe("PLAYER", _do_something)
+SignalBus.subscribe("PLAYER", _do_something2)
 SignalBus.publish("PLAYER")
+SignalBus.publish("PLAYER", ["extra"])
+SignalBus.publish("PLAYER", ["extra", 2])
 SignalBus.unsubscribe("PLAYER", _do_something)
+
+
+# Define a function to subscribe to a signal
+func _do_something():
+    print("Received signal")
+
+func _do_something_extra(arg0):
+    print("Received signal with arguments")
 ```
 
 You can also disconnect objects using the disconnect method.
