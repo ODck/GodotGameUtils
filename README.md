@@ -83,6 +83,10 @@ func _ready():
 func _inject():
     # Inject dependencies
     _some_class = DiContainer.resolveSingleton("SomeClass")
+```
+
+```gdscript
+#some_class.gd
 
 func _tick(delta):
     # Process singleton objects
@@ -93,7 +97,7 @@ The SignalBus class is a signal bus that allows you to send signals between obje
 
 ```gdscript
 SignalBus.subscribe("PLAYER", _do_something)
-SignalBus.subscribe("PLAYER", _do_something2)
+SignalBus.subscribe("PLAYER", _do_something_extra)
 SignalBus.publish("PLAYER")
 SignalBus.publish("PLAYER", ["extra"])
 SignalBus.publish("PLAYER", ["extra", 2])
