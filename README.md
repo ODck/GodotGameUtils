@@ -112,7 +112,7 @@ func _do_something_extra(arg0):
     print("Received signal with arguments")
 ```
 
-You can also disconnect objects using the disconnect method.
+You can also disconnect objects using the unsubscribe method.
 
 ## Contributing
 Pull requests are welcome! If you have any bug fixes, feature requests, or improvements, feel free to contribute to this project.
